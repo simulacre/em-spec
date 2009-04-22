@@ -1,6 +1,5 @@
 require File.dirname(__FILE__) + '/../lib/em/spec'
-#require 'spec'
-#require File.dirname(__FILE__) + '/../../lib/em/spec/rspec'
+require File.dirname(__FILE__) + '/../lib/em/rspec/example_group_methods'
 
 describe 'Rspec' do
   it 'should work as normal outside EM.describe' do
@@ -8,7 +7,9 @@ describe 'Rspec' do
   end
 end
 
-EM.rspec EventMachine do
+describe EventMachine do
+  include EMSpec
+  
   it 'should work' do
     done
   end

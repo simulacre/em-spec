@@ -1,11 +1,11 @@
-module Spec
-  module Example
-    module ExampleMethods
+#module Spec
+#  module Example
+#    module ExampleMethods
+    module EMSpec
 
       def instance_eval(&block)
         
         EM.run do
-          @_em_spec_fiber = :goo
           em_spec_exception = nil
           @_em_spec_fiber = Fiber.new do
             begin
@@ -41,8 +41,8 @@ module Spec
         EM.stop_event_loop if EM.reactor_running?
         @_em_spec_fiber.resume if @_em_spec_fiber.alive?
       end
-
     end
+#    end
 
-  end
-end
+#  end
+#end
