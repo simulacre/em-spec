@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/../lib/em/spec'
-require 'spec'
-require File.dirname(__FILE__) + '/../lib/em/spec/rspec'
-
-#EM.spec_backend = EventMachine::Spec::Rspec
+#require 'spec'
+#require File.dirname(__FILE__) + '/../../lib/em/spec/rspec'
 
 describe 'Rspec' do
   it 'should work as normal outside EM.describe' do
@@ -17,7 +15,7 @@ EM.rspec EventMachine do
 
   it 'should have timers' do
     start = Time.now
-
+    
     EM.add_timer(0.5){
       (Time.now-start).should be_close( 0.5, 0.1 )
       done
@@ -27,7 +25,7 @@ EM.rspec EventMachine do
   it 'should have periodic timers' do
     num = 0
     start = Time.now
-
+    
     timer = EM.add_periodic_timer(0.5){
       if (num += 1) == 2
         (Time.now-start).should be_close( 1.0, 0.1 )
@@ -44,9 +42,5 @@ EM.rspec EventMachine do
       done
     }
   end
-
-  # it "should not block on failure" do
-  #   1.should == 2
-  # end
-
+  
 end
