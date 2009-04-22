@@ -45,3 +45,9 @@ describe EventMachine do
   end
   
 end
+
+describe "Rspec", "when running an example group after another group that uses EMSpec " do
+  it "should work normally" do
+    :does_not_hang.should_not be_false
+  end
+end
