@@ -10,11 +10,11 @@ There are two ways to use the Rspec extension.  To use it as a helper, include E
   describe EventMachine do
     include EM::SpecHelper
   
-    it "works normally when not using #em"
+    it "works normally when not using #em" do
       1.should == 1
     end
   
-    it "makes testing evented code easy with #em"
+    it "makes testing evented code easy with #em" do
       em do
         start = Time.now
 
