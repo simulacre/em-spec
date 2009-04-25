@@ -6,7 +6,26 @@ describe 'Rspec' do
   end
 end
 
-describe EventMachine do
+describe EventMachine, "when testing with EM::SpecHelper" do
+  include EM::SpecHelper
+  
+  it "should not require a call to done when #em is not used" do
+    1.should == 1
+  end
+  
+  it "should have timers" do
+    em do
+      start = Time.now
+
+      EM.add_timer(0.5){
+        (Time.now-start).should be_close( 0.5, 0.1 )
+        done
+      }
+    end
+  end
+end
+
+describe EventMachine, "when testing with EM::Spec" do
   include EM::Spec
   
   it 'should work' do
