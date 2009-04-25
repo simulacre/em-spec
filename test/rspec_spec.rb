@@ -7,7 +7,7 @@ describe 'Rspec' do
 end
 
 describe EventMachine do
-  include EMSpec
+  include EM::Spec
   
   it 'should work' do
     done
@@ -42,7 +42,7 @@ describe EventMachine do
       done
     }
   end
-  
+    
 end
 
 describe "Rspec", "when running an example group after another group that uses EMSpec " do
