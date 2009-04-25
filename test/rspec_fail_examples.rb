@@ -1,5 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/em/spec'
-require File.dirname(__FILE__) + '/../lib/em/rspec/example_group_methods'
+require File.dirname(__FILE__) + '/../lib/em/rspec'
 
 describe EventMachine, "when running failing examples" do
   include EMSpec

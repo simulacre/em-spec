@@ -1,5 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/em/spec'
-require File.dirname(__FILE__) + '/../lib/em/rspec/example_group_methods'
+require File.dirname(__FILE__) + '/../lib/em/rspec'
 
 describe 'Rspec' do
   it 'should work as normal outside EM.describe' do
