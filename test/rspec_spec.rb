@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/em/rspec'
+require File.dirname(__FILE__) + '/../lib/em-spec/rspec'
 
 describe 'Rspec' do
   it 'should work as normal outside EM.describe' do

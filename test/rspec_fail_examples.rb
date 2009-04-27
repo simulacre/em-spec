@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/em/rspec'
+require File.dirname(__FILE__) + '/../lib/em-spec/rspec'
 
 describe EventMachine, "when running failing examples" do
   include EM::Spec

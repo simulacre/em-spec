@@ -13,9 +13,8 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('rspec', '>= 1.1.12')
   s.files = ["README.rdoc",
              "Rakefile",
-             "lib/em/spec.rb",
-             "lib/em/spec/bacon.rb",
-             "lib/em/rspec.rb",   
+             "lib/em-spec/bacon.rb",
+             "lib/em-spec/rspec.rb",   
              "lib/ext/fiber18.rb",
              "test/bacon_spec.rb",
              "test/rspec_spec.rb",
