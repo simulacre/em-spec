@@ -6,7 +6,7 @@ em-spec can be used with either bacon or rspec.
 =Rspec
 There are two ways to use the Rspec extension.  To use it as a helper, include EM::SpecHelper in your describe block.  You then use the em method to wrap your evented test code.  Inside the em block, you must call #done after your expectations.  Everything works normally otherwise.
 
-  require "em/rspec"
+  require "em-spec/rspec"
   describe EventMachine do
     include EM::SpecHelper
   
@@ -26,7 +26,7 @@ There are two ways to use the Rspec extension.  To use it as a helper, include E
     end
   end
 The other option is to include EM::Spec in your describe block.  This will patch Rspec so that all of your examples run inside an em block automatically:
-  require "em/rspec"
+  require "em-spec/rspec"
   describe EventMachine do
     include EM::Spec
     
@@ -48,7 +48,7 @@ The other option is to include EM::Spec in your describe block.  This will patch
 =Bacon
 The API is identical to Bacon, except that you must explicitly call 'done' after all the current behavior's assertions have been made:
 
-  require 'em/spec'
+  require 'em-spec/bacon'
 
   EM.describe EventMachine do
 
