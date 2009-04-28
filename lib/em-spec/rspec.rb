@@ -15,7 +15,7 @@ module EventMachine
           begin
             block.call
           rescue Exception => em_spec_exception
-            resume_on_error
+            done
           end
           Fiber.yield
         end  
@@ -28,18 +28,11 @@ module EventMachine
 
     def done
       EM.next_tick{
-        :done.should == :done
         finish_em_spec_fiber
       }
     end
 
     private
-
-    def resume_on_error
-      EM.next_tick{
-        finish_em_spec_fiber
-      }
-    end
 
     def finish_em_spec_fiber
       EM.stop_event_loop if EM.reactor_running?
