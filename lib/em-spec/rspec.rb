@@ -4,10 +4,7 @@ require File.dirname(__FILE__) + '/../ext/fiber18'
 module EventMachine
   module SpecHelper
 
-    class EMSpecTimeoutError < Timeout::Error
-    end
-
-    def em(timeout=nil, &block)
+    def em(&block)
 
       EM.run do
         em_spec_exception = nil
