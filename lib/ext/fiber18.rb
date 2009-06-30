@@ -55,7 +55,7 @@ unless defined? Fiber
     end
   end
 else
-  require 'fiber'
+  require 'fiber' unless Fiber.respond_to?(:current)
 end
 
 if __FILE__ == $0

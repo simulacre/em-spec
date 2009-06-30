@@ -10,7 +10,7 @@ task :install => :gem do
   sh 'sudo gem install em-spec-*.gem'
 end
 
-task :default => :gem
+task :default => :spec
 
 task :spec do
   sh 'bacon test/bacon_spec.rb'
