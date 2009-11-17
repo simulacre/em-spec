@@ -64,6 +64,27 @@ describe EventMachine, "when testing with EM::Spec" do
     
 end
 
+describe EventMachine, "when testing with EM::Spec with a maximum execution time per test" do
+
+  include EM::Spec
+
+  default_timeout 2
+
+  it 'should timeout before reaching done' do
+    EM.add_timer(3) {
+      done
+    }
+  end
+
+  it 'should timeout before reaching done' do
+    timeout(4)
+    EM.add_timer(3) {
+      done
+    }
+  end
+
+end
+
 describe "Rspec", "when running an example group after another group that uses EMSpec " do
   it "should work normally" do
     :does_not_hang.should_not be_false

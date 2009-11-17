@@ -49,3 +49,22 @@ EM.describe EventMachine do
   # end
 
 end
+
+EM.describe EventMachine, "with time restrictions" do
+  default_timeout 2
+  
+  should 'succeed here' do
+    timeout(5)
+    EM.add_timer(3) { done }
+  end
+
+end
+
+EM.describe EventMachine, "with time restrictions" do
+  default_timeout 2
+  
+  should 'raise fail here' do
+    EM.add_timer(3) { done }
+  end
+
+end

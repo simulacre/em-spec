@@ -13,6 +13,6 @@ end
 task :default => :spec
 
 task :spec do
-  sh 'bacon test/bacon_spec.rb'
+  sh('bacon test/bacon_spec.rb') rescue nil
   sh 'spec -f specdoc test/rspec_spec.rb test/rspec_fail_examples.rb'
 end

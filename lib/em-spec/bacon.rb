@@ -47,18 +47,42 @@ module EventMachine
 end
 
 class Bacon::FiberedContext < Bacon::Context
+
+  SpecTimeoutExceededError = Class.new(RuntimeError)
+
+  def default_timeout(timeout)
+    $_em_default_time_to_finish = timeout
+  end
+
+  def cancel_timer
+    EM.cancel_timer($_em_timer) if $_em_timer
+  end
+
+  def timeout(time_to_run)
+    cancel_timer
+    $_em_timer = EM.add_timer(time_to_run) { done(false) }
+  end
+
   def it *args
     super{
       if block_given?
+        if $_em_default_time_to_finish
+          timeout($_em_default_time_to_finish)
+        end
         yield
         Fiber.yield
       end
     }
   end
 
-  def done
+  def done(succeed = true)
+    cancel_timer
     EM.next_tick{
-      :done.should == :done
+      if succeed 
+        :done.should == :done
+      else
+        should.flunk
+      end
       $em_spec_fiber.resume if $em_spec_fiber
     }
   end
