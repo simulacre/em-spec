@@ -1,19 +1,21 @@
 require 'rake/testtask'
 
-task :gem => :gemspec do
-  sh 'gem build em-spec.gemspec'
-end
-
-task :gemspec do
-  
-end
-
-task :install => :gem do
-  sh 'sudo gem install em-spec-*.gem'
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "em-spec"
+    s.description = s.summary = "Simple BDD API for testing asynchronous Ruby/EventMachine code"
+    s.email = "aman@tmm1.net"
+    s.homepage = "http://github.com/joshbuddy/em-spec"
+    s.authors = ["Aman Gupta"]
+    s.files = FileList["[A-Z]*", "{lib,test}/**/*"]
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
 task :default => :spec
-
 
 Rake::TestTask.new do |t|
   t.libs << "test"
