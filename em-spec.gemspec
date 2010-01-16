@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{em-spec}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aman Gupta"]
-  s.date = %q{2009-11-19}
+  s.date = %q{2010-01-16}
   s.description = %q{Simple BDD API for testing asynchronous Ruby/EventMachine code}
   s.email = %q{aman@tmm1.net}
   s.extra_rdoc_files = [
@@ -17,16 +17,16 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "README.rdoc",
-     "Rakefile",
-     "VERSION",
-     "lib/em-spec/bacon.rb",
-     "lib/em-spec/rspec.rb",
-     "lib/em-spec/test.rb",
-     "lib/ext/fiber18.rb",
-     "test/bacon_spec.rb",
-     "test/rspec_fail_examples.rb",
-     "test/rspec_spec.rb",
-     "test/test_spec.rb"
+    "Rakefile",
+    "VERSION",
+    "lib/em-spec/bacon.rb",
+    "lib/em-spec/rspec.rb",
+    "lib/em-spec/test.rb",
+    "lib/ext/fiber18.rb",
+    "test/bacon_spec.rb",
+    "test/rspec_fail_examples.rb",
+    "test/rspec_spec.rb",
+    "test/test_spec.rb"
   ]
   s.homepage = %q{http://github.com/joshbuddy/em-spec}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -35,9 +35,9 @@ Gem::Specification.new do |s|
   s.summary = %q{Simple BDD API for testing asynchronous Ruby/EventMachine code}
   s.test_files = [
     "test/bacon_spec.rb",
-     "test/rspec_fail_examples.rb",
-     "test/rspec_spec.rb",
-     "test/test_spec.rb"
+    "test/rspec_fail_examples.rb",
+    "test/rspec_spec.rb",
+    "test/test_spec.rb"
   ]
 
   if s.respond_to? :specification_version then
