@@ -90,7 +90,7 @@ class EmSpecWithTimeoutOverrideTest < Test::Unit::TestCase
 end
 
 class AnotherNormalTest < Test::Unit::TestCase
-  def normal_test
+  def test_normal
     assert_equal 1, 1
   end
 end

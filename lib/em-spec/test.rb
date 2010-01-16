@@ -69,17 +69,18 @@ module EventMachine
   
     def self.included(cls)
       cls.class_eval(<<-HERE_DOC, __FILE__, __LINE__)
-        include TestHelper
-
         def self.default_timeout(timeout)
           self.send(:remove_const, :DefaultTimeout)
           self.send(:const_set, :DefaultTimeout, timeout)
         end
         
         include TestHelper
+
         alias_method :run_without_em, :run
         def run(result, &block)
           em(DefaultTimeout) { run_without_em(result, &block) }
+        rescue Exception
+          add_error($!)
         end
         
       HERE_DOC
@@ -89,5 +90,3 @@ module EventMachine
   end
   
 end
-
-
