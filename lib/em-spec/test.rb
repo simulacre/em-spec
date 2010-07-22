@@ -79,8 +79,12 @@ module EventMachine
         alias_method :run_without_em, :run
         def run(result, &block)
           em(DefaultTimeout) { run_without_em(result, &block) }
-        rescue Exception
-          add_error($!)
+        rescue Exception => e
+          if RUBY_VERSION >= "1.9.1"
+            result.puke(self.class, @name, e)
+          else
+            add_error($!)
+          end
         end
         
       HERE_DOC
