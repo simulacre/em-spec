@@ -1,7 +1,9 @@
+$LOAD_PATH.unshift "lib"
+
 require 'test/unit'
 require 'rubygems'
 require 'eventmachine'
-require 'lib/em-spec/test'
+require 'em-spec/test'
 
 class NormalTest < Test::Unit::TestCase
   def test_trivial
