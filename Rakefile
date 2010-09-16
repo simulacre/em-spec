@@ -1,19 +1,7 @@
 require 'rake/testtask'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "em-spec"
-    s.description = s.summary = "Simple BDD API for testing asynchronous Ruby/EventMachine code"
-    s.email = "aman@tmm1.net"
-    s.homepage = "http://github.com/joshbuddy/em-spec"
-    s.authors = ["Aman Gupta"]
-    s.files = FileList["[A-Z]*", "{lib,test}/**/*"]
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
-end
+require 'rubygems'
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
 task :default => :spec
 
@@ -28,3 +16,4 @@ task :spec do
   sh('bacon test/bacon_spec.rb') rescue nil
   sh 'spec -f specdoc test/rspec_spec.rb test/rspec_fail_examples.rb'
 end
+
