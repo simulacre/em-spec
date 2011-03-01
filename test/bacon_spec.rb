@@ -43,6 +43,24 @@ EM.describe EventMachine do
       done
     }
   end
+  
+  describe 'subscope' do
+    should 'works here' do
+      i_did_it = false
+      
+      fib = Fiber.current
+      
+      EM.add_timer(0.1){
+        i_did_it = true
+        fib.resume
+      }
+      
+      Fiber.yield
+      
+      i_did_it.should == true
+      proc{ done }.should.not.raise(NameError)
+    end
+  end
 
   # it "should not block on failure" do
   #   1.should == 2

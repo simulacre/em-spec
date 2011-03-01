@@ -74,6 +74,13 @@ class Bacon::FiberedContext < Bacon::Context
       end
     }
   end
+  
+  def describe(*args, &block)
+    context = Bacon::FiberedContext.new(args.join(' '), &block)
+    @before.each { |b| context.before(&b) }
+    @after.each { |b| context.after(&b) }
+    context.run
+  end
 
   def done(succeed = true)
     cancel_timer
