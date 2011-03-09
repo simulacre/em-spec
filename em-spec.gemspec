@@ -3,16 +3,16 @@
 require File.join(File.dirname(__FILE__), 'lib', 'em-spec', 'version')
 
 Gem::Specification.new do |s|
-  s.name = 'em-spec'
+  s.name = 'schmurfy-em-spec'
   s.version = EventMachine::Spec::VERSION
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Aman Gupta"]
+  s.authors = ["Aman Gupta", "Julien Ammous"]
   s.summary = "Simple BDD API for testing asynchronous Ruby/EventMachine code"
   s.description = "Simple BDD API for testing asynchronous Ruby/EventMachine code"
-  s.email = %q{aman@tmm1.net}
+  s.email = %q{schmurfy@gmail.com}
   s.extra_rdoc_files = ['README.rdoc']
   s.files = `git ls-files`.split("\n")
-  s.homepage = %q{http://github.com/joshbuddy/em-spec}
+  s.homepage = %q{http://github.com/schmurfy/em-spec}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
