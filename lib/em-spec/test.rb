@@ -5,29 +5,38 @@ module EventMachine
   TestTimeoutExceededError = Class.new(RuntimeError)
 
   module TestHelper
-    
+
     def self.included(cls)
       cls.class_eval(<<-HERE_DOC, __FILE__, __LINE__)
         DefaultTimeout = nil unless const_defined?(:DefaultTimeout)
-        
+
         def self.default_timeout(timeout)
-          self.send(:remove_const, :DefaultTimeout)
-          self.send(:const_set, :DefaultTimeout, timeout)
+
+          if self.const_defined? :DefaultTimeout
+            self.ancestors.each do |cls|
+              begin
+                cls.send(:remove_const, :DefaultTimeout)
+                cls.send(:const_set, :DefaultTimeout, timeout)
+                break
+              rescue
+              end
+            end
+          else
+            self.send(:const_set, :DefaultTimeout, timeout)
+          end
         end
-        
+
         def current_default_timeout
           DefaultTimeout
         end
       HERE_DOC
-      
     end
-    
-    
+
     def timeout(time_to_run)
       EM.cancel_timer(@_em_timer) if @_em_timer
       @_em_timer = EM.add_timer(time_to_run) { done('timeout exceeded') }
     end
-    
+
     def em(time_to_run = current_default_timeout, &block)
       @flunk_test = nil
       EM.run do
@@ -41,9 +50,9 @@ module EventMachine
           end
           Fiber.yield
         end
-        
+
         @_em_spec_fiber.resume
-        
+
         raise em_spec_exception if em_spec_exception
       end
       raise(@flunk_test) if @flunk_test
@@ -62,18 +71,13 @@ module EventMachine
       EM.stop_event_loop if EM.reactor_running?
       @_em_spec_fiber.resume if @_em_spec_fiber.alive?
     end
-    
+
   end
-  
+
   module Test
-  
+
     def self.included(cls)
       cls.class_eval(<<-HERE_DOC, __FILE__, __LINE__)
-        def self.default_timeout(timeout)
-          self.send(:remove_const, :DefaultTimeout)
-          self.send(:const_set, :DefaultTimeout, timeout)
-        end
-        
         include TestHelper
 
         alias_method :run_without_em, :run
@@ -86,11 +90,10 @@ module EventMachine
             add_error($!)
           end
         end
-        
+
       HERE_DOC
-      
     end
-    
+
   end
-  
+
 end
