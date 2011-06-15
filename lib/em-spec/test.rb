@@ -43,19 +43,20 @@ module EventMachine
         timeout(time_to_run) if time_to_run
         em_spec_exception = nil
         @_em_spec_fiber = Fiber.new do
-          begin
+          output = begin
             block.call
           rescue Exception => em_spec_exception
             done
           end
-          Fiber.yield
+          Fiber.yield(output)
         end
 
-        @_em_spec_fiber.resume
+        @_output = @_em_spec_fiber.resume
 
         raise em_spec_exception if em_spec_exception
       end
       raise(@flunk_test) if @flunk_test
+      @_output
     end
 
     def done(flunk_reason = nil)
