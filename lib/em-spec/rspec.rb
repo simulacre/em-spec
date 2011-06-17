@@ -7,7 +7,7 @@ module EventMachine
     SpecTimeoutExceededError = Class.new(RuntimeError)
     
     def self.included(cls)
-      ::Spec::Example::ExampleGroup.instance_eval "
+      ::RSpec::Core::ExampleGroup.instance_eval "
       @@_em_default_time_to_finish = nil
       def self.default_timeout(timeout)
         @@_em_default_time_to_finish = timeout
