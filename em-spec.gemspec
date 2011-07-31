@@ -25,9 +25,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'test-unit'
   s.add_dependency 'eventmachine'
   
-  s.add_development_dependency 'bundler',       '~> 1.0.10'
-  s.add_development_dependency 'guard-rspec',   '~> 0.2.0'
-  s.add_development_dependency 'guard-bundler', '~> 0.1.1'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'guard-bundler'
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
