@@ -25,7 +25,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'test-unit'
   s.add_dependency 'eventmachine'
   
-  s.add_development_dependency 'growl'
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    # also install growlnotify from the
+    # Extras/growlnotify/growlnotify.pkg in Growl disk image
+    s.add_development_dependency 'growl'
+  end
+  
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-bundler'
 
