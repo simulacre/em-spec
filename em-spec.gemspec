@@ -20,13 +20,12 @@ Gem::Specification.new do |s|
   s.rubyforge_project = 'em-spec'
 
   # dependencies
-  s.add_dependency 'rspec', '~> 2.6'
+  s.add_dependency 'rspec', '~> 2.6.0'
   s.add_dependency 'bacon'
   s.add_dependency 'test-unit'
   s.add_dependency 'eventmachine'
   
   s.add_development_dependency 'bundler',       '~> 1.0.10'
-  s.add_development_dependency 'rspec',         '~> 2.5.0'
   s.add_development_dependency 'guard-rspec',   '~> 0.2.0'
   s.add_development_dependency 'guard-bundler', '~> 0.1.1'
 
