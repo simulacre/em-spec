@@ -17,8 +17,8 @@ describe EventMachine, "when testing with EM::SpecHelper" do
     em do
       start = Time.now
 
-      EM.add_timer(0.5){
-        (Time.now-start).should be_close( 0.5, 0.1 )
+      EM.add_timer(0.5) {
+        (Time.now - start).should be_within(0.1).of(0.5)
         done
       }
     end
@@ -35,8 +35,8 @@ describe EventMachine, "when testing with EM::Spec" do
   it 'should have timers' do
     start = Time.now
     
-    EM.add_timer(0.5){
-      (Time.now-start).should be_close( 0.5, 0.1 )
+    EM.add_timer(0.5) {
+      (Time.now - start).should be_within(0.5).of(0.5)
       done
     }
   end
@@ -45,9 +45,9 @@ describe EventMachine, "when testing with EM::Spec" do
     num = 0
     start = Time.now
     
-    timer = EM.add_periodic_timer(0.5){
+    timer = EM.add_periodic_timer(0.5) {
       if (num += 1) == 2
-        (Time.now-start).should be_close( 1.0, 0.1 )
+        (Time.now - start).should be_within(1).of(0.5)
         EM.__send__ :cancel_timer, timer
         done
       end
@@ -68,7 +68,7 @@ describe EventMachine, "when testing with EM::Spec with a maximum execution time
 
   include EM::Spec
 
-  default_timeout 2
+  default_timeout 4
 
   it 'should timeout before reaching done' do
     EM.add_timer(3) {

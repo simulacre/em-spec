@@ -20,7 +20,19 @@ Gem::Specification.new do |s|
   s.rubyforge_project = 'em-spec'
 
   # dependencies
-  s.add_development_dependency 'bundler', ">= 1.0.0"
+  s.add_dependency 'rspec', '~> 2.6.0'
+  s.add_dependency 'bacon'
+  s.add_dependency 'test-unit'
+  s.add_dependency 'eventmachine'
+  
+  if RUBY_PLATFORM.downcase.include?("darwin")
+    # also install growlnotify from the
+    # Extras/growlnotify/growlnotify.pkg in Growl disk image
+    s.add_development_dependency 'growl'
+  end
+  
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'guard-bundler'
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
