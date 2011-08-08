@@ -21,6 +21,7 @@ GEM
       guard (>= 0.2.2)
     guard-rspec (0.2.0)
       guard (>= 0.2.2)
+    rake (0.8.7)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -40,3 +41,4 @@ DEPENDENCIES
   growl
   guard-bundler
   guard-rspec
+  rake (= 0.8.7)
