@@ -21,9 +21,10 @@ module EventMachine
     end
     
     def em(time_to_run = @@_em_default_time_to_finish, &block)
+      em_spec_exception = nil
+
       EM.run do
         timeout(time_to_run) if time_to_run
-        em_spec_exception = nil
         @_em_spec_fiber = Fiber.new do
           begin
             block.call
@@ -34,9 +35,9 @@ module EventMachine
         end  
 
         @_em_spec_fiber.resume
-
-        raise em_spec_exception if em_spec_exception
       end
+
+      raise em_spec_exception if em_spec_exception
     end
 
     def done
