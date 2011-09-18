@@ -79,6 +79,8 @@ The API is identical to Bacon, except that you must explicitly call 'done' after
 =Test::Unit
 There are two ways to use the Test::Unit extension.  To use it as a helper, include EM::TestHelper in your test unit class.  You then use the em method to wrap your evented test code.  Inside the em block, you must call #done after your expectations.  Everything works normally otherwise.
 
+  require 'em-spec/test'
+
   class EmSpecHelperTest < Test::Unit::TestCase
     
     include EventMachine::TestHelper
@@ -92,7 +94,9 @@ There are two ways to use the Test::Unit extension.  To use it as a helper, incl
   end
   
 The other option is to include EM::Test in your test class.  This will patch Test::Unit so that all of your examples run inside an em block automatically:
-    
+
+  require 'em-spec/test'
+
   class EmSpecTest < Test::Unit::TestCase
   
     include EventMachine::Test
