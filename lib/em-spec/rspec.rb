@@ -3,9 +3,9 @@ require File.dirname(__FILE__) + '/../ext/fiber18'
 
 module EventMachine
   module SpecHelper
-    
+
     SpecTimeoutExceededError = Class.new(RuntimeError)
-    
+
     def self.included(cls)
       ::RSpec::Core::ExampleGroup.instance_eval "
       @@_em_default_time_to_finish = nil
@@ -14,12 +14,12 @@ module EventMachine
       end
       "
     end
-    
+
     def timeout(time_to_run)
       EM.cancel_timer(@_em_timer) if @_em_timer
       @_em_timer = EM.add_timer(time_to_run) { done; raise SpecTimeoutExceededError.new }
     end
-    
+
     def em(time_to_run = @@_em_default_time_to_finish, &block)
       em_spec_exception = nil
 
@@ -32,7 +32,28 @@ module EventMachine
             done
           end
           Fiber.yield
-        end  
+        end
+
+        @_em_spec_fiber.resume
+      end
+
+      raise em_spec_exception if em_spec_exception
+    end
+
+    def synchrony(time_to_run = @@_em_default_time_to_finish, &block)
+      em_spec_exception = nil
+
+      EM.run do
+        timeout(time_to_run) if time_to_run
+        @_em_spec_fiber = Fiber.new do
+          begin
+            block.call
+            done
+          rescue Exception => em_spec_exception
+            done
+          end
+          Fiber.yield
+        end
 
         @_em_spec_fiber.resume
       end
@@ -52,9 +73,9 @@ module EventMachine
       EM.stop_event_loop if EM.reactor_running?
       @_em_spec_fiber.resume if @_em_spec_fiber.alive?
     end
-    
+
   end
-  
+
   module Spec
 
     include SpecHelper
@@ -66,7 +87,7 @@ module EventMachine
     end
 
   end
-  
+
 end
 
 
